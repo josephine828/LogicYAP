@@ -13,12 +13,12 @@ function Diagram({ onClose }) {
         <p className="text-gray-700">
           This is a flow chart that hopefully helps you see one way to approach proofs!
         </p>
-        <div className="flex flex-row w-full h-full">
-        <ReactFlow nodes={nodes} edges={edges} className="border-4 rounded-xl border-secondary-300 mt-4 w-[calc(47.5%)!important] h-[calc(100%-125px)!important]">
+        <div className="flex flex-row w-full h-[calc(100%-125px)] ">
+        <ReactFlow nodes={nodes} edges={edges} className="border-4 rounded-xl border-secondary-300 mt-4 w-[calc(47.5%)!important]">
             <Controls />
             <MiniMap />
         </ReactFlow>
-        <div className="text-center mt-4 w-[37.5vw] px-4 h-[calc(100%-125px)] overflow-y-auto">
+        <div className="text-center mt-4 w-[37.5vw] px-4 overflow-y-auto">
             <h4 className="text-lg font-semibold mb-4">Tips and Tricks</h4>
             <p>Know what you are looking for/proving and either start instantiating your quantifiers in the premises or save them until you need them (which is helpful when you have multiple variables!)</p><br/>
             <p>When instantiating, if you have a mix of existential(s) and universal(s), instantiate existential(s) first because this has restrictions and you need to flag in the justification (but make sure to NOT indent!)</p><br/>
