@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import ProofContainer from './ProofContainer'
 import Rules from './Rules'
 import LearnMore from './LearnMore'
+import Diagram from './Diagram'
 
 function Main() {
     const [showRules, setShowRules] = useState(false)
     const [showLearnMore, setShowLearnMore] = useState(false)
+    const [showDiagram, setShowDiagram] = useState(false)
 
     const handleShowRules = () => {
         setShowRules(!showRules)
@@ -17,6 +19,14 @@ function Main() {
 
     const handleCloseLearnMore = () => {
         setShowLearnMore(false)
+    }
+
+    const handleShowDiagram = () => {
+        setShowDiagram(true)
+    }
+
+    const handleCloseDiagram = () => {
+        setShowDiagram(false)
     }
 
     return (
@@ -35,15 +45,21 @@ function Main() {
                 </p>
                 <button
                     onClick={handleShowRules}
-                    className="bg-primary-500 text-white px-4 py-2 rounded-lg mr-2"
+                    className="bg-secondary-600 text-white px-4 py-2 rounded-lg mr-2"
                 >
                     {showRules ? 'Hide Rules' : 'Show Rules' }
                 </button>
                 <button
                     onClick={handleLearnMore}
-                    className="bg-secondary-500 text-white px-4 py-2 rounded-lg"
+                    className="bg-secondary-700 text-white px-4 py-2 rounded-lg mr-2"
                 >
                     Learn More
+                </button>
+                <button
+                    onClick={handleShowDiagram}
+                    className="bg-secondary-800 text-white px-4 py-2 rounded-lg"
+                >
+                    Show Diagram
                 </button>
             </div>
             <div className="w-full md:flex-row sm:flex-col flex justify-center items-start">
@@ -51,6 +67,7 @@ function Main() {
                 <ProofContainer />
             </div>
             {showLearnMore && <LearnMore onClose={handleCloseLearnMore} />}
+            {showDiagram && <Diagram onClose={handleCloseDiagram} />}
         </main>
     )
 }
