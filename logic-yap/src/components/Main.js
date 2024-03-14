@@ -3,6 +3,7 @@ import ProofContainer from './ProofContainer'
 import Rules from './Rules'
 import LearnMore from './LearnMore'
 import Diagram from './Diagram'
+import PropositionAnalyzer from './PropositionAnalyzer'
 
 function Main() {
     const [showRules, setShowRules] = useState(false)
@@ -65,6 +66,7 @@ function Main() {
             <div className="w-full md:flex-row sm:flex-col flex justify-center items-start">
                 {showRules && <Rules />}
                 <ProofContainer />
+                <PropositionAnalyzer />
             </div>
             {showLearnMore && <LearnMore onClose={handleCloseLearnMore} />}
             {showDiagram && <Diagram onClose={handleCloseDiagram} />}
