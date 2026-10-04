@@ -63,7 +63,7 @@ function Main() {
                     Show Diagram
                 </button>
             </div>
-            <div className="w-full md:flex-row sm:flex-col flex justify-center items-start">
+            <div className="w-full flex flex-col md:flex-row gap-4 justify-center items-start px-4">
                 {showRules && <Rules />}
                 <ProofContainer />
                 <PropositionAnalyzer />

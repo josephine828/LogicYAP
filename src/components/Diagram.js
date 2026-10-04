@@ -11,7 +11,7 @@ function Diagram({ onClose }) {
       <div className="bg-white rounded-lg shadow-lg p-6 w-[75vw] h-[70vh]">
         <h3 className="text-lg font-semibold mb-4">Proof Diagram</h3>
         <p className="text-gray-700">
-          This is a flow chart that hopefully helps you see one way to approach proofs!
+          Choose a strategy from the goal, then check the conditions of each rule.
         </p>
         <div className="flex flex-row w-full h-[calc(100%-125px)] ">
         <ReactFlow nodes={nodes} edges={edges} className="border-4 rounded-xl border-secondary-300 mt-4 w-[calc(47.5%)!important]">
@@ -20,11 +20,12 @@ function Diagram({ onClose }) {
         </ReactFlow>
         <div className="text-center mt-4 w-[37.5vw] px-4 overflow-y-auto">
             <h4 className="text-lg font-semibold mb-4">Tips and Tricks</h4>
-            <p>Know what you are looking for/proving and either start instantiating your quantifiers in the premises or save them until you need them (which is helpful when you have multiple variables!)</p><br/>
-            <p>When instantiating, if you have a mix of existential(s) and universal(s), instantiate existential(s) first because this has restrictions and you need to flag in the justification (but make sure to NOT indent!)</p><br/>
-            <p>IF you are proving something that contains a conjuncition, find and separate the conjuncts in the premises so you can put them together with the conjunction rule.</p><br/>
-            <p>If you are proving something that contains a disjunction, find one of the disjuncts in the premises and isolate it before using addition to add the other disjunct.</p><br/>
-            <p>If you are proving something that contains a conditional, you will use a conditional proof, which uses indentation. Start by assuming the antecedent and find the consequent.</p><br/>
+            <p>Use the main operator of the goal to choose a strategy. A connective inside a larger formula does not make the whole formula eligible for its inference rule.</p><br/>
+            <p>Universal instantiation replaces free occurrences of the quantified variable with a term, without capturing it. An existential witness starts a subproof with a fresh term; discharge that subproof using existential elimination before using its conclusion outside.</p><br/>
+            <p>To prove a conjunction, derive both conjuncts and combine them with conjunction. Simplification extracts a conjunct from an available conjunction.</p><br/>
+            <p>To prove a disjunction, deriving either disjunct permits addition. Eliminating a disjunction requires ruling out a disjunct or showing that both cases yield the same conclusion.</p><br/>
+            <p>To prove a conditional, one useful strategy is to assume its antecedent, derive its consequent, and discharge the assumption with conditional proof.</p><br/>
+            <p>Universal generalization requires an arbitrary term absent from the premises and open assumptions. You cannot generalize an existential witness. Existential generalization requires only an instance with a term that can be substituted freely.</p><br/>
             {/* <p></p><br/>
             <p></p><br/>
             <p></p><br/>

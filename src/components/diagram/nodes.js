@@ -2,7 +2,6 @@ const COLOR_LEVEL_1 = "#e4b1ab";
 const COLOR_LEVEL_2 = "#e39695";
 const COLOR_LEVEL_3 = "#df7373";
 const COLOR_LEVEL_4 = "#da5552";
-const COLOR_LEVEL_5 = "#cc444b";
 
 export const nodes = [
   {
@@ -30,7 +29,7 @@ export const nodes = [
   {
     id: "stateConclusion",
     position: { x: 250, y: 175 },
-    data: { label: "State the Conclusion as the last step" },
+    data: { label: "Identify the goal and its main operator" },
     style: {
       background: COLOR_LEVEL_3,
       color: "#fff",
@@ -41,7 +40,7 @@ export const nodes = [
   {
     id: "negatedQuantifier",
     position: { x: 50, y: 250 },
-    data: { label: "If the conclusion is a negated quantifier, use CQN" },
+    data: { label: "For a negated quantifier, try quantifier negation" },
     style: {
       background: COLOR_LEVEL_4,
       color: "#fff",
@@ -54,7 +53,7 @@ export const nodes = [
     position: { x: 250, y: 250 },
     data: {
       label:
-        "If you want to prove a universal, go back to the top and use the flagging step to set up for universal generalization, and make sure to indent",
+        "For a universal goal, derive an instance with an arbitrary term; check generalization restrictions",
     },
     style: {
       background: COLOR_LEVEL_4,
@@ -68,7 +67,7 @@ export const nodes = [
     position: { x: 450, y: 250 },
     data: {
       label:
-        "If you want to prove an existential, you do NOT need to indent to generalize an existential",
+        "For an existential goal, derive an instance and use existential generalization",
     },
     style: {
       background: COLOR_LEVEL_4,

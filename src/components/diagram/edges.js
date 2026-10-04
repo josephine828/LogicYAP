@@ -35,12 +35,12 @@ export const edges = [
     target: "existential",
   },
   {
-    id: "existential-to-putThingsTogether",
+    id: "universal-to-putThingsTogether",
     source: "universal",
     target: "putThingsTogether",
   },
   {
-    id: "existential-to-putThingsTogether",
+    id: "negatedQuantifier-to-putThingsTogether",
     source: "negatedQuantifier",
     target: "putThingsTogether",
   },

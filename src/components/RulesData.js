@@ -1,173 +1,141 @@
+// Schema letters p, q, r, and s stand for arbitrary well formed formulas.
+// Repeated schema letters must stand for the same formula throughout a rule.
 export const rulesOfInference = [
     {
         name: 'Modus Ponens',
         abbreviation: 'M.P.',
         steps: ['p ⊃ q', 'p'],
         conclusion: 'q',
-        description: 'If p implies q and p is true, then q must be true.',
-        helpfulTips: [
-            'Remember to check if the antecedent of the conditional is true in the premise.',
-            'Check if the conclusion follows logically from the premises.',
-        ],
-        types: {
-            steps: ['Conditional', 'Simple'],
-            conclusion: 'Simple',
-        },
+        description: 'From a conditional and its antecedent, infer its consequent.',
+        helpfulTips: ['The entire second cited line must match the antecedent, including any compound formula.'],
     },
     {
         name: 'Modus Tollens',
         abbreviation: 'M.T.',
         steps: ['p ⊃ q', '~q'],
         conclusion: '~p',
-        description: 'If p implies q and q is false, then p must be false.',
-        helpfulTips: [
-            'Use the contrapositive of the conditional to deduce the conclusion.',
-            'Consider the negation of the consequent in the premise.',
-        ],
-        types: {
-            steps: ['Conditional', 'Negation'],
-            conclusion: 'Negation',
-        },
+        description: 'From a conditional and the negation of its consequent, infer the negation of its antecedent.',
+        helpfulTips: ['Negate the entire consequent. The negation of P · Q is ~(P · Q).'],
     },
     {
         name: 'Hypothetical Syllogism',
         abbreviation: 'H.S.',
         steps: ['p ⊃ q', 'q ⊃ r'],
         conclusion: 'p ⊃ r',
-        description: 'If p implies q and q implies r, then p implies r.',
-        helpfulTips: [
-            'Chain together two conditional statements to form a conclusion.',
-            'Apply transitivity of implication.',
-        ],
-        types: {
-            steps: ['Conditional', 'Conditional'],
-            conclusion: 'Conditional',
-        },
+        description: 'Chain two conditionals whose middle formulas match.',
+        helpfulTips: ['The first consequent must be exactly the second antecedent.'],
     },
     {
         name: 'Simplification',
         abbreviation: 'Simp.',
         steps: ['p · q'],
         conclusion: 'p',
-        description: 'If both p and q are true, then p is true.',
-        helpfulTips: [
-            'Identify conjunctions in the premises.',
-            'Extract the individual components from the conjunctions to reach the conclusion.',
-        ],
-        types: {
-            steps: ['Conjunction'],
-            conclusion: 'Simple',
-        },
+        description: 'From a conjunction, infer its left conjunct.',
+        helpfulTips: ['Conjunction must be the main operator of the cited line. Each conjunct may itself be compound.'],
     },
     {
         name: 'Simplification',
         abbreviation: 'Simp.',
         steps: ['p · q'],
         conclusion: 'q',
-        description: 'If both p and q are true, then q is true.',
-        helpfulTips: [
-            'Identify conjunctions in the premises.',
-            'Extract the individual components from the conjunctions to reach the conclusion.',
-        ],
-        types: {
-            steps: ['Conjunction'],
-            conclusion: 'Simple',
-        },
+        description: 'From a conjunction, infer its right conjunct.',
+        helpfulTips: ['Do not extract a conjunct from inside a conditional or a negation.'],
     },
     {
         name: 'Conjunction',
         abbreviation: 'Conj.',
         steps: ['p', 'q'],
         conclusion: 'p · q',
-        description:
-            'If both p and q are true, then their conjunction is true.',
-        helpfulTips: [
-            'Identify simple propositions in the premises.',
-            'Combine these propositions using the conjunction operator to reach the conclusion.',
-        ],
-        types: {
-            steps: ['Simple', 'Simple'],
-            conclusion: 'Conjunction',
-        },
+        description: 'Combine two established formulas into their conjunction.',
+        helpfulTips: ['Both formulas must be available cited lines; they need not be atomic propositions.'],
     },
     {
         name: 'Dilemma',
         abbreviation: 'Dil.',
         steps: ['p ⊃ q', 'r ⊃ s', 'p ∨ r'],
         conclusion: 'q ∨ s',
-        description:
-            'If p implies q and r implies s, and either p or r is true, then either q or s is true.',
-        helpfulTips: [
-            'Identify disjunctions and conditional statements in the premise.',
-        ],
-        types: {
-            steps: ['Conditional', 'Conditional', 'Disjunction'],
-            conclusion: 'Disjunction',
-        },
+        description: 'Constructive dilemma: the disjunction of two antecedents and their conditionals implies the disjunction of their consequents.',
+        helpfulTips: ['Match each disjunct with the antecedent of the corresponding conditional. Disjunction is inclusive.'],
     },
     {
         name: 'Disjunctive Syllogism',
         abbreviation: 'D.S.',
         steps: ['p ∨ q', '~p'],
         conclusion: 'q',
-        description:
-            'If either p or q is true, and p is false, then q must be true.',
-        helpfulTips: [
-            'Identify disjunctions and negations in the premise.',
-            'Apply disjunctive syllogism to eliminate one disjunct and infer the other.',
-        ],
-        types: {
-            steps: ['Disjunction', 'Negation'],
-            conclusion: 'Simple',
-        },
+        description: 'From a disjunction and the negation of its left disjunct, infer its right disjunct.',
+        helpfulTips: ['A disjunction alone does not establish either disjunct.'],
     },
     {
         name: 'Disjunctive Syllogism',
         abbreviation: 'D.S.',
         steps: ['p ∨ q', '~q'],
         conclusion: 'p',
-        description:
-            'If either p or q is true, and q is false, then p must be true.',
-        helpfulTips: [
-            'Identify disjunctions and negations in the premise.',
-            'Apply disjunctive syllogism to eliminate one disjunct and infer the other.',
-        ],
-        types: {
-            steps: ['Disjunction', 'Negation'],
-            conclusion: 'Simple',
-        },
+        description: 'From a disjunction and the negation of its right disjunct, infer its left disjunct.',
+        helpfulTips: ['The negated formula must match the entire eliminated disjunct.'],
     },
     {
         name: 'Addition',
         abbreviation: 'Add.',
         steps: ['p'],
         conclusion: 'p ∨ q',
-        description:
-            'If p is true, then the disjunction of p and any other proposition q is true.',
-        helpfulTips: [
-            'Identify simple propositions in the premise.',
-            'Use addition to introduce new disjuncts into a disjunction.',
-        ],
-        types: {
-            steps: ['Simple'],
-            conclusion: 'Disjunction',
-        },
+        description: 'An established formula implies a disjunction containing it as the left disjunct.',
+        helpfulTips: ['The new disjunct may be any well formed formula; it does not have to be established.'],
     },
     {
         name: 'Addition',
         abbreviation: 'Add.',
         steps: ['q'],
         conclusion: 'p ∨ q',
-        description:
-            'If q is true, then the disjunction of p and any other proposition p is true.',
-        helpfulTips: [
-            'Identify simple propositions in the premise.',
-            'Use addition to introduce new disjuncts into a disjunction.',
-        ],
-        types: {
-            steps: ['Simple'],
-            conclusion: 'Disjunction',
-        },
+        description: 'An established formula implies a disjunction containing it as the right disjunct.',
+        helpfulTips: ['Adding a disjunct does not establish that new disjunct on its own.'],
+    },
+    {
+        name: 'Reiteration',
+        abbreviation: 'Reit.',
+        steps: ['p'],
+        conclusion: 'p',
+        description: 'Repeat an earlier formula that remains in scope.',
+        helpfulTips: ['A line inside a closed subproof is unavailable outside that subproof.'],
+    },
+    {
+        name: 'Contradiction',
+        abbreviation: '⊥I',
+        steps: ['p', '~p'],
+        conclusion: '⊥',
+        description: 'A formula and its negation establish a contradiction.',
+        helpfulTips: ['Two unrelated formulas are not a contradiction. Both cited lines must be available.'],
+    },
+    {
+        name: 'Explosion',
+        abbreviation: '⊥E',
+        steps: ['⊥'],
+        conclusion: 'p',
+        description: 'An established contradiction implies any formula in classical logic.',
+        helpfulTips: ['First derive ⊥; this rule does not introduce a contradiction on its own.'],
+    },
+    {
+        name: 'Biconditional Introduction',
+        abbreviation: '≡I',
+        steps: ['p ⊃ q', 'q ⊃ p'],
+        conclusion: 'p ≡ q',
+        description: 'Establish a biconditional from conditionals in both directions.',
+        helpfulTips: ['Use conditional proof to derive either conditional when needed.'],
+    },
+    {
+        name: 'Biconditional Elimination',
+        abbreviation: '≡E',
+        steps: ['p ≡ q', 'p (or q)'],
+        conclusion: 'q (or p, respectively)',
+        description: 'A biconditional and either of its sides imply the other side.',
+        helpfulTips: ['The cited side must match the whole corresponding formula.'],
+    },
+    {
+        name: 'Proof by Cases',
+        abbreviation: 'Cases',
+        steps: ['p ∨ q', 'p ⊃ r', 'q ⊃ r'],
+        conclusion: 'r',
+        description: 'A conclusion established conditionally in each alternative follows from their disjunction.',
+        helpfulTips: ['Both conditionals must have the same consequent. Derive them with conditional proof when starting from case subproofs.'],
     },
 ]
 
@@ -175,220 +143,185 @@ export const replacementRules = [
     {
         name: 'Double Negation',
         abbreviation: 'D.N.',
-        transformations: [{
-            from: 'p',
-            to: '~~p',
-        }],
-        description:
-            "If a proposition is negated twice, it's equivalent to the original proposition and vice versa.",
-        helpfulTips: [
-            'These can be especially useful when you need to use Modus Tollens or Disjunctive Syllogism because you need the negation of a proposition.',
+        transformations: [{ from: 'p', to: '~~p' }],
+        description: 'In classical logic, a formula and its double negation are equivalent.',
+        helpfulTips: ['Introduce or remove a pair of negations around the same complete formula.'],
+    },
+    {
+        name: 'Duplication',
+        abbreviation: 'Dup.',
+        transformations: [{ from: 'p', to: 'p ∨ p' }, { from: 'p', to: 'p · p' }],
+        description: 'Repeating a formula in a conjunction or disjunction preserves its truth value.',
+        helpfulTips: ['Both occurrences must be identical, even when the formula is compound.'],
+    },
+    {
+        name: 'Commutation',
+        abbreviation: 'Comm.',
+        transformations: [{ from: 'p ∨ q', to: 'q ∨ p' }, { from: 'p · q', to: 'q · p' }],
+        description: 'Reverse the order of the two conjuncts or disjuncts.',
+        helpfulTips: ['Conditionals are not commutative: p ⊃ q does not license q ⊃ p.'],
+    },
+    {
+        name: 'Association',
+        abbreviation: 'Assoc.',
+        transformations: [
+            { from: '(p ∨ q) ∨ r', to: 'p ∨ (q ∨ r)' },
+            { from: '(p · q) · r', to: 'p · (q · r)' },
         ],
-        types: [{
-            from: 'Simple',
-            to: 'Negation',
-        }],
+        description: 'Regroup a chain of conjunctions or a chain of disjunctions.',
+        helpfulTips: ['Preserve the order of the formulas and use the same connective throughout.'],
     },
     {
-      name: "Duplication",
-      abbreviation: "Dup.",
-      transformations: [
-        {
-          from: "p",
-          to: "p ∨ p"
-        },
-        {
-          from: "p",
-          to: "p · p"
-        }
-      ],
-      description: "A proposition is equivalent to itself duplicated via conjunction or disjunction.",
-      helpfulTips: ["Use this to duplicate the proposition using conjunction or disjunction based on your needs."],
-      types: [
-        {
-          from: "Simple",
-          to: "Conjunction"
-        },
-        {
-          from: "Simple",
-          to: "Disjunction"
-        }
-      ]
+        name: 'Contraposition',
+        abbreviation: 'Contrap.',
+        transformations: [{ from: 'p ⊃ q', to: '~q ⊃ ~p' }],
+        description: 'A conditional is equivalent to the conditional obtained by exchanging and negating both sides.',
+        helpfulTips: ['Negate both complete sides and reverse their order; merely reversing them is invalid.'],
     },
     {
-      name: "Commutation",
-      abbreviation: "Comm.",
-      transformations: [
-        {
-          from: "p ∨ q",
-          to: "q ∨ p"
-        },
-        {
-          from: "p · q",
-          to: "q · p"
-        }
-      ],
-      description: "The order of disjunctions and conjunctions can be reversed without changing the meaning.",
-      helpfulTips: ["You can use this to swap the order of disjunctions in a disjunction or conjunctions in a conjunction."],
-      types: [
-        {
-          from: "Disjunction",
-          to: "Disjunction"
-        },
-        {
-          from: "Conjunction",
-          to: "Conjunction"
-        }
-      ]
+        name: "DeMorgan's",
+        abbreviation: 'DeM.',
+        transformations: [
+            { from: '~(p ∨ q)', to: '~p · ~q' },
+            { from: '~(p · q)', to: '~p ∨ ~q' },
+        ],
+        description: 'Move a negation through a conjunction or disjunction by negating both components and exchanging the connective.',
+        helpfulTips: ['The outside negation applies to the entire parenthesized formula.'],
     },
     {
-      name: "Association",
-      abbreviation: "Assoc.",
-      transformations: [
-        {
-          from: "(p ∨ q) ∨ r",
-          to: "p ∨ (q ∨ r)"
-        },
-        {
-          from: "(p · q) · r",
-          to: "p · (q · r)"
-        }
-      ],
-      description: "The grouping of disjunctions and conjunctions can be changed without changing the meaning.",
-      helpfulTips: ["You can use this to regroup disjunctions in a disjunction or conjunctions in a conjunction."],
-      types: [
-        {
-          from: "Disjunction",
-          to: "Disjunction"
-        },
-        {
-          from: "Conjunction",
-          to: "Conjunction"
-        },
-      ]
+        name: 'Biconditional Exchange',
+        abbreviation: 'B.E.',
+        transformations: [{ from: 'p ≡ q', to: '(p ⊃ q) · (q ⊃ p)' }],
+        description: 'A biconditional requires the conditional in both directions.',
+        helpfulTips: ['A single conditional is insufficient to establish a biconditional.'],
     },
     {
-      name: "Contraposition",
-      abbreviation: "Contrap.",
-      transformations: [
-        {
-          from: "p ⊃ q",
-          to: "~q ⊃ ~p"
-        }
-      ],
-      description: "A conditional statement can be contraposed by negating both the antecedent and consequent, and vice versa.",
-      helpfulTips: ["You can use this to transform conditional statements and their contrapositives."],
-      types: [
-        {
-          from: "Conditional",
-          to: "Conditional"
-        }
-      ]
+        name: 'Conditional Exchange',
+        abbreviation: 'C.E.',
+        transformations: [{ from: 'p ⊃ q', to: '~p ∨ q' }],
+        description: 'Material implication is equivalent to the disjunction of a negated antecedent and its consequent.',
+        helpfulTips: ['Negate only the antecedent when changing to the disjunction.'],
     },
     {
-      name: "DeMorgan's",
-      abbreviation: "DeM.",
-      transformations: [
-        {
-          from: "~(p ∨ q)",
-          to: "~p · ~q"
-        },
-        {
-          from: "~(p · q)",
-          to: "~p ∨ ~q"
-        },
-      ],
-      description: "The negation of a disjunction is equivalent to the conjunction of the negations, and the negation of a conjunction is equivalent to the disjunction of negations.",
-      helpfulTips: ["Think of this as distributing the negation to everything within the parentheses. You're turning both propositions into their negations and changing the operator into its 'opposite'."],
-      types: [
-        {
-          from: "Negation",
-          to: "Conjunction"
-        },
-        {
-          from: "Negation",
-          to: "Disjunction"
-        }
-      ]
+        name: 'Distribution',
+        abbreviation: 'Dist.',
+        transformations: [
+            { from: 'p · (q ∨ r)', to: '(p · q) ∨ (p · r)' },
+            { from: 'p ∨ (q · r)', to: '(p ∨ q) · (p ∨ r)' },
+        ],
+        description: 'Distribute conjunction over disjunction, or disjunction over conjunction.',
+        helpfulTips: ['Retain the repeated formula in both branches; use parentheses to preserve grouping.'],
     },
     {
-      name: "Biconditional Exchange",
-      abbreviation: "B.E.",
-      transformations: [
-        {
-          from: "p ≡ q",
-          to: "(p ⊃ q) · (q ⊃ p)"
-        }
-      ],
-      description: "A biconditional statement can be expressed as a conjunction of two conditionals, and vice versa.",
-      helpfulTips: ["You can use this to transform biconditional statements and their equivalent forms."],
-      types: [
-        {
-          from: "Biconditional",
-          to: "Conjunction"
-        }
-      ]
+        name: 'Exportation',
+        abbreviation: 'Exp.',
+        transformations: [{ from: '(p · q) ⊃ r', to: 'p ⊃ (q ⊃ r)' }],
+        description: 'A conditional with a conjunctive antecedent is equivalent to two nested conditionals.',
+        helpfulTips: ['Both equivalent forms have a conditional as their main operator.'],
+    },
+]
+
+// Subproof rules discharge only the current innermost ordinary assumption.
+export const naturalDeductionRules = [
+    {
+        name: 'Assumption',
+        abbreviation: 'Assume',
+        steps: [],
+        conclusion: 'p (open a subproof)',
+        description: 'Introduce a temporary assumption in a new subproof.',
+        helpfulTips: ['An assumption is available only within its scope. Discharge it with a subproof rule before claiming the main proof is complete.'],
     },
     {
-      name: "Conditional Exchange",
-      abbreviation: "C.E.",
-      transformations: [
-        {
-          from: "p ⊃ q",
-          to: "~p ∨ q"
-        },
-      ],
-      description: "A conditional statement can be exchanged with a disjunction where the antecedent is negated and becomes a disjunct with the consequent, and vice versa.",
-      helpfulTips: ["You can use this to transform conditional statements into disjunctions and vice versa."],
-      types: [
-        {
-          from: "Conditional",
-          to: "Disjunction"
-        }
-      ]
+        name: 'Conditional Proof',
+        abbreviation: 'C.P. / ⊃I',
+        steps: ['Assume p in a subproof', 'Derive q inside that subproof'],
+        conclusion: 'p ⊃ q (discharge the assumption p)',
+        description: 'A subproof from an assumed antecedent to its consequent establishes a conditional.',
+        helpfulTips: ['Close nested subproofs first. Lines depending on the discharged assumption cannot be cited individually outside its subproof.'],
     },
     {
-      name: "Distribution",
-      abbreviation: "Dist.",
-      transformations: [
-        {
-          from: "p · (q ∨ r)",
-          to: "(p · q) ∨ (p · r)"
-        },
-        {
-          from: "p ∨ (q · r)",
-          to: "(p ∨ q) · (p ∨ r)"
-        }
-      ],
-      description: "The distribution rule allows you to distribute a conjunction or disjunction over another conjunction or disjunction.",
-      helpfulTips: ["You can use this to expand or simplify complex expressions involving conjunctions and disjunctions."],
-      types: [
-        {
-          from: "Conjunction",
-          to: "Disjunction"
-        },
-        {
-          from: "Disjunction",
-          to: "Conjunction"
-        }
-      ]
+        name: 'Negation Introduction',
+        abbreviation: '~I',
+        steps: ['Assume p in a subproof', 'Derive ⊥ (a contradiction)'],
+        conclusion: '~p (discharge the assumption p)',
+        description: 'Refute an assumption by deriving a contradiction under that assumption.',
+        helpfulTips: ['Use the contradiction rule to derive ⊥ from a formula and its negation.'],
     },
     {
-      name: "Exportation",
-      abbreviation: "Exp.",
-      transformations: [
-        {
-          from: "(p · q) ⊃ r",
-          to: "p ⊃ (q ⊃ r)"
-        }
-      ],
-      description: "The exportation rule allows you to move a conjunction inside a conditional statement, and vice versa.",
-      helpfulTips: ["You can use this to transform complex conditional statements involving conjunctions."],
-      types: [
-        {
-          from: "Conditional",
-          to: "Conjunction"
-        }
-      ]
-    }
+        name: 'Indirect Proof',
+        abbreviation: 'I.P.',
+        steps: ['Assume ~p in a subproof', 'Derive ⊥ (a contradiction)'],
+        conclusion: 'p (discharge the assumption ~p)',
+        description: 'Classical indirect proof establishes a formula by refuting its negation.',
+        helpfulTips: ['Negation introduction alone yields ~~p here. Removing the double negation uses classical logic.'],
+    },
+]
+
+export const quantifierRules = [
+    {
+        name: 'Universal Instantiation',
+        abbreviation: 'U.I. / ∀E',
+        steps: ['∀x φ'],
+        conclusion: 'φ[t/x]',
+        description: 'Instantiate a universally quantified formula with a term t.',
+        helpfulTips: ['∀ must be the main operator. φ[t/x] replaces every free occurrence of x in φ with t. No variable of t may become bound by a quantifier in φ.'],
+    },
+    {
+        name: 'Universal Generalization',
+        abbreviation: 'U.G. / ∀I',
+        steps: ['φ[a/x], with a arbitrary'],
+        conclusion: '∀x φ',
+        description: 'Generalize a result about an arbitrary parameter a.',
+        helpfulTips: ['a must not occur freely in any premise, open assumption, or the generalized conclusion. Substitution must avoid capture. A premise about a particular named object is insufficient.'],
+    },
+    {
+        name: 'Existential Generalization',
+        abbreviation: 'E.G. / ∃I',
+        steps: ['φ[t/x]'],
+        conclusion: '∃x φ',
+        description: 'A witnessed instance establishes an existential claim.',
+        helpfulTips: ['The cited formula must be a capture-free substitution instance of the proposed existential formula.'],
+    },
+    {
+        name: 'Existential Instantiation',
+        abbreviation: 'E.I.',
+        steps: ['∃x φ'],
+        conclusion: 'Assume φ[a/x] in a witness subproof',
+        description: 'Introduce a fresh witness as a scoped temporary assumption.',
+        helpfulTips: ['Choose a new parameter a absent from the proof so far and its goal. This witness instance is not an unrestricted premise; close the witness scope with Existential Elimination.'],
+    },
+    {
+        name: 'Existential Elimination',
+        abbreviation: 'E.E. / ∃E',
+        steps: ['∃x φ', 'Witness subproof: assume φ[a/x] and derive q'],
+        conclusion: 'q (discharge the witness assumption)',
+        description: 'An existential claim supports a result independent of its chosen witness.',
+        helpfulTips: ['a must not occur freely in the existential premise, q, or any other open assumption. All inner subproofs must be closed before discharging the witness.'],
+    },
+    {
+        name: 'Quantifier Negation',
+        abbreviation: 'Q.N.',
+        transformations: [
+            { from: '~∀x φ', to: '∃x ~φ' },
+            { from: '~∃x φ', to: '∀x ~φ' },
+        ],
+        description: 'Negating a quantified claim exchanges its quantifier and negates its body in classical logic.',
+        helpfulTips: ['Preserve the bound variable and the scope of the quantified body.'],
+    },
+    {
+        name: 'Identity Introduction',
+        abbreviation: '=I',
+        steps: [],
+        conclusion: 't = t',
+        description: 'Every term is identical to itself.',
+        helpfulTips: ['The two terms must be identical. No cited line is required.'],
+    },
+    {
+        name: 'Identity Elimination',
+        abbreviation: '=E',
+        steps: ['t = u', 'φ containing t (or u)'],
+        conclusion: 'φ with free occurrences of t replaced by u (or conversely)',
+        description: 'Identical terms can replace each other in a formula.',
+        helpfulTips: ['Replace whole term occurrences without capturing variables or changing bound occurrences.'],
+    },
 ]
